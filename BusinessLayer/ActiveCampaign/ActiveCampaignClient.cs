@@ -40,13 +40,13 @@ namespace ActiveCampaignNet
 
         #region Excute API Functions 
 
-        public ApiResult<List<ContactObject>> GetContactList(string apiAction, Dictionary<string, string> parameters)
+        public ApiResult<List<ContactObject>> GetContactList(Dictionary<string, string> parameters)
         {
 
             var result = new ApiResult<List<ContactObject>>();
             List<ContactObject> contactObjects = new List<ContactObject>();
             ContactObject contactObject;
-            var uri = CreateBaseUrl(apiAction);
+            var uri = CreateBaseUrl("contact_list");
             foreach (KeyValuePair<string, string> item in parameters)
             {
                 uri += "&" + item.Key + "=" + item.Value;
@@ -135,12 +135,12 @@ namespace ActiveCampaignNet
             }
         }
 
-        public Dictionary<string, FieldObject> GetFields(string apiAction, Dictionary<string, string> parameters)
+        public Dictionary<string, FieldObject> GetFields(Dictionary<string, string> parameters)
         {
 
             Dictionary<string, FieldObject> keyValuePairs = new Dictionary<string, FieldObject>();
             FieldObject fieldObject;
-            var uri = CreateBaseUrl(apiAction);
+            var uri = CreateBaseUrl("list_field_view");
 
             foreach (KeyValuePair<string, string> item in parameters)
             {
@@ -185,12 +185,12 @@ namespace ActiveCampaignNet
             
         }
 
-        public List<Deal> GetDealListByContactEmail(string apiAction, Dictionary<string, string> parameters)
+        public List<Deal> GetDealListByContactEmail(Dictionary<string, string> parameters)
         {
 
             List<Deal> deals = new List<Deal>();
 
-            var uri = CreateBaseUrl(apiAction);
+            var uri = CreateBaseUrl("deal_list");
             foreach (KeyValuePair<string, string> item in parameters)
             {
                 uri += "&" + item.Key + "=" + item.Value;
@@ -231,7 +231,7 @@ namespace ActiveCampaignNet
 
         public List<ContactNotesDetail> GetDealNotes(string email,DateTime? dateTime)
         {
-            List<Deal> deals = GetDealListByContactEmail("deal_list", new Dictionary<string, string>
+            List<Deal> deals = GetDealListByContactEmail(new Dictionary<string, string>
                                         {
 
                                             { "filters[email]",email}
